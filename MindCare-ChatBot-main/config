@@ -1,0 +1,26 @@
+﻿// Mental Health Focus Configuration
+export const MENTAL_HEALTH_RULES = {
+  HARD_BLOCKED_TOPICS: [
+    "politics", "government", "election",
+    "sports", "football", "basketball",
+    "technology", "computer", "ai",
+    "religion", "philosophy", "science"
+  ],
+  CRISIS_KEYWORDS: [
+    "suicide", "kill myself", 
+    "self-harm", "want to die"
+  ],
+  RESPONSES: {
+    OFF_TOPIC: "I specialize in mental health. Let's focus on your feelings.",
+    CRISIS: "Please contact crisis support immediately:\n988 (US) or 116 123 (UK)",
+    REDIRECT: "While that's important, let's focus on your emotional wellbeing."
+  }
+};
+
+// AI Behavior Configuration
+export const AI_CONFIG = {
+  MODEL: "dolphin-phi",
+  TEMPERATURE: 0.3,
+  MAX_TOKENS: 150,
+  STOP_SEQUENCES: ["\n", "User:", "INST]"]
+};

@@ -1,0 +1,35 @@
+﻿import { MENTAL_HEALTH_RULES } from '../config/safetyRules';
+
+export const validateMentalHealthContent = (text) => {
+  // Crisis detection (highest priority)
+  if (MENTAL_HEALTH_RULES.CRISIS_KEYWORDS.some(keyword => 
+    text.toLowerCase().includes(keyword)
+  )) {
+    return {
+      valid: false,
+      response: MENTAL_HEALTH_RULES.RESPONSES.CRISIS
+    };
+  }
+
+  // Hard blocked topics
+  const blockedTopic = MENTAL_HEALTH_RULES.HARD_BLOCKED_TOPICS.find(topic => 
+    text.toLowerCase().includes(topic)
+  );
+  if (blockedTopic) {
+    return {
+      valid: false, 
+      response: MENTAL_HEALTH_RULES.RESPONSES.OFF_TOPIC
+    };
+  }
+
+  return { valid: true, response: text };
+};
+
+export const sanitizeAIResponse = (text) => {
+  // Remove AI disclaimers
+  return text
+    .replace(/\([^)]*disclaimer[^)]*\)/gi, '')
+    .replace(/\[[^\]]*note[^\]]*\]/gi, '')
+    .replace(/as an ai language model/gi, '')
+    .replace(/i cannot answer that/gi, '');
+};
